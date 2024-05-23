@@ -9,7 +9,7 @@
 #include <vector>
 using namespace std;
 
-#include "Math/bigint.h"
+#include "Math/BigInt.h"
 #include "Math/modp.h"
 
 template <class T>
@@ -33,7 +33,7 @@ public:
     void get(T& x) const { x = v[i]; i++; }
 };
 
-class ConversionIterator : public Generator<bigint>
+class ConversionIterator : public Generator<BigInt>
 {
     const vector<modp>& v;
     const Zp_Data& ZpD;
@@ -41,21 +41,21 @@ class ConversionIterator : public Generator<bigint>
 
 public:
     ConversionIterator(const vector<modp>& v, const Zp_Data& ZpD) : v(v), ZpD(ZpD), i(0) {}
-    Generator<bigint>* clone() const { return new ConversionIterator(*this); }
-    void get(bigint& x) const { to_bigint(x, v[i], ZpD); i++; }
+    Generator<BigInt>* clone() const { return new ConversionIterator(*this); }
+    void get(BigInt& x) const { to_bigint(x, v[i], ZpD); i++; }
 };
 
-class WriteConversionIterator : public Generator<bigint>
+class WriteConversionIterator : public Generator<BigInt>
 {
     vector<modp>& v;
     const Zp_Data& ZpD;
     mutable size_t i;
-    mutable bigint tmp;
+    mutable BigInt tmp;
 
 public:
     WriteConversionIterator(vector<modp>& v, const Zp_Data& ZpD) : v(v), ZpD(ZpD), i(0) {}
-    Generator<bigint>* clone() const { return new WriteConversionIterator(*this); }
-    void get(bigint& x) const { tmp = x; v[i].convert_destroy(tmp, ZpD); i++; }
+    Generator<BigInt>* clone() const { return new WriteConversionIterator(*this); }
+    void get(BigInt& x) const { tmp = x; v[i].convert_destroy(tmp, ZpD); i++; }
 };
 
 #endif /* FHE_GENERATOR_H_ */

@@ -34,7 +34,7 @@ void RealPairwiseMachine::init()
     else
     {
         setup_keys<FFT_Data>();
-        bigint p = setup_p.FieldD.get_prime();
+        BigInt p = setup_p.FieldD.get_prime();
         gfp::init_field(p);
         ofstream outf;
         if (output)

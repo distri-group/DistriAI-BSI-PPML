@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-#include "Math/bigint.h"
+#include "Math/BigInt.h"
 #include "FHE/Ciphertext.h"
 #include "FHE/AddableVector.h"
 #include "Protocols/CowGearOptions.h"
@@ -43,7 +43,7 @@ class Proof
     AddableVector<r_type> r_tmp;
 
   public:
-    Preimages(int size, const FHE_PK& pk, const bigint& p, int n_players);
+    Preimages(int size, const FHE_PK& pk, const BigInt& p, int n_players);
     AddableMatrix<bound_type> m;
     Randomness r;
     void add(octetStream& os);
@@ -53,11 +53,11 @@ class Proof
     size_t report_size(ReportType type) { return m.report_size(type) + r.report_size(type); }
   };
 
-  bigint tau,rho;
+  BigInt tau,rho;
 
   unsigned int phim;
   int B_plain_length, B_rand_length;
-  bigint plain_check, rand_check;
+  BigInt plain_check, rand_check;
   unsigned int V;
   unsigned int U;
 
@@ -75,7 +75,7 @@ class Proof
     typedef AddableVector<bound_type> T;
     typedef AddableMatrix<typename Int_Random_Coins::rand_type> X;
 
-    Proof(int sc, const bigint& Tau, const bigint& Rho, const FHE_PK& pk,
+    Proof(int sc, const BigInt& Tau, const BigInt& Rho, const FHE_PK& pk,
             int n_proofs = 1, bool diagonal = false) :
               diagonal(diagonal),
               B_plain_length(0), B_rand_length(0), pk(&pk), n_proofs(n_proofs)
@@ -109,7 +109,7 @@ class Proof
   virtual ~Proof() {}
 
   public:
-  static bigint slack(int slack, int sec, int phim);
+  static BigInt slack(int slack, int sec, int phim);
 
   bool use_top_gear(const FHE_PK& pk)
   {
@@ -159,41 +159,41 @@ class NonInteractiveProof : public Proof
   static int comp_sec(int sec) { return sec > 0 ? max(COMP_SEC, sec) : 0; }
 
 public:
-  bigint static slack(int sec, int phim)
-  { sec = comp_sec(sec); return bigint(phim * sec * sec) << (sec / 2 + 8); }
+  BigInt static slack(int sec, int phim)
+  { sec = comp_sec(sec); return BigInt(phim * sec * sec) << (sec / 2 + 8); }
 
   NonInteractiveProof(int sec, const FHE_PK& pk,
       int extra_slack, bool diagonal = false) :
       Proof(comp_sec(sec), pk, 1, diagonal)
   {
     sec = this->sec;
-    bigint B;
+    BigInt B;
     B=128*sec*sec;
     B <<= extra_slack;
     B_plain_length = numBits(B*phim*tau);
     B_rand_length = numBits(B*3*phim*rho);
-    plain_check = (bigint(1) << B_plain_length) - sec * tau;
-    rand_check = (bigint(1) << B_rand_length) - sec * rho;
+    plain_check = (BigInt(1) << B_plain_length) - sec * tau;
+    rand_check = (BigInt(1) << B_rand_length) - sec * rho;
   }
 };
 
 class InteractiveProof : public Proof
 {
 public:
-  bigint static slack(int sec, int phim)
+  BigInt static slack(int sec, int phim)
   { (void)phim; return pow(2, 1.5 * sec + 1); }
 
   InteractiveProof(int sec, const FHE_PK& pk,
       int n_proofs = 1, bool diagonal = false) :
       Proof(sec, pk, n_proofs, diagonal)
   {
-    bigint B;
-    B = bigint(1) << sec;
+    BigInt B;
+    B = BigInt(1) << sec;
     B_plain_length = numBits(B * tau);
     B_rand_length = numBits(B * rho);
     // leeway for completeness
-    plain_check = (bigint(2) << B_plain_length);
-    rand_check = (bigint(2) << B_rand_length);
+    plain_check = (BigInt(2) << B_plain_length);
+    rand_check = (BigInt(2) << B_rand_length);
   }
 };
 

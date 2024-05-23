@@ -20,7 +20,7 @@ using namespace std;
 #include "GC/Machine.hpp"
 #include "Processor/ProcessorBase.hpp"
 #include "Processor/IntInput.hpp"
-#include "Math/bigint.hpp"
+#include "Math/BigInt.hpp"
 
 namespace GC
 {
@@ -117,7 +117,7 @@ void GC::Processor<T>::check_input(const U& in, const int* params)
 							+ "-bit fixed-point number with "
 							+ to_string(params[1]) + "-bit precision: "
 							+ to_string(
-									mpf_class(bigint(in)) * exp2(-params[1])));
+									mpf_class(BigInt(in)) * exp2(-params[1])));
 	}
 }
 
@@ -395,9 +395,9 @@ void Processor<T>::print_reg(int reg, int n, int size)
 #ifdef DEBUG_VALUES
     cout << "print_reg " << typeid(T).name() << " " << reg << " " << &C[reg] << endl;
 #endif
-    bigint output;
+    BigInt output;
     for (int i = 0; i < size; i++)
-        output += bigint((unsigned long)C[reg + i].get()) << (T::default_length * i);
+        output += BigInt((unsigned long)C[reg + i].get()) << (T::default_length * i);
     out << "Reg[" << reg << "] = " << hex << showbase << output << dec << " # ";
     print_str(n);
     out << endl << flush;
@@ -424,13 +424,13 @@ void Processor<T>::print_reg_signed(unsigned n_bits, Integer reg)
     }
     else
     {
-        bigint tmp = 0;
+        BigInt tmp = 0;
         for (int i = 0; i < DIV_CEIL(n_bits, Clear::N_BITS); i++)
         {
-            tmp += bigint((unsigned long)C[reg + i].get()) << (i * Clear::N_BITS);
+            tmp += BigInt((unsigned long)C[reg + i].get()) << (i * Clear::N_BITS);
         }
-        if (tmp >= bigint(1) << (n_bits - 1))
-            tmp -= bigint(1) << n_bits;
+        if (tmp >= BigInt(1) << (n_bits - 1))
+            tmp -= BigInt(1) << n_bits;
         out << dec << tmp << flush;
     }
 }
@@ -450,8 +450,8 @@ void Processor<T>::print_str(int n)
 template <class T>
 void Processor<T>::print_float(const vector<int>& args)
 {
-    bigint::output_float(out,
-            bigint::get_float(C[args[0]], C[args[1]], C[args[2]], C[args[3]]),
+    BigInt::output_float(out,
+            BigInt::get_float(C[args[0]], C[args[1]], C[args[2]], C[args[3]]),
             C[args[4]]);
 }
 

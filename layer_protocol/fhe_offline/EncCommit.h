@@ -81,10 +81,10 @@ class EncCommit : public EncCommitBase<T,FD,S>
 
   public:
 
-  static bigint active_mask(int phim, int TT = DEFAULT_T * DEFAULT_B,
+  static BigInt active_mask(int phim, int TT = DEFAULT_T * DEFAULT_B,
       int delta = DEFAULT_DELTA)
   { return 4 * delta * TT * phim; }
-  static bigint active_slack(int phim) { return 2 * active_mask(phim); }
+  static BigInt active_slack(int phim) { return 2 * active_mask(phim); }
 
   EncCommit() : cnt(-1) { ; }
   ~EncCommit();

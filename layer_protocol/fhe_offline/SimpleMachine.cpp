@@ -366,7 +366,7 @@ string MachineBase::tradeoff()
 void MachineBase::mult_performance()
 {
     int n = 1e7;
-    bigint pr = 1;
+    BigInt pr = 1;
     int bl = MAX_MOD_SZ > 5 ? 300 : (MAX_MOD_SZ) * 64 - 1;
     pr=(pr<<bl)+1;
     while (!probPrime(pr)) { pr=pr+2; }

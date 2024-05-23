@@ -35,7 +35,7 @@ modp Find_Primitive_Root_m(int m,const vector<int>& poly,const Zp_Data& ZpD)
   modp ans,e,one,base;
   assignOne(one,ZpD);
   assignOne(base,ZpD);
-  bigint   exp;
+  BigInt   exp;
   exp=(ZpD.pr-1)/m;
   bool flag=true;
   while (flag)
@@ -81,7 +81,7 @@ modp Find_Primitive_Root_2power(int m,const Zp_Data& ZpD)
   modp ans,e,one,base;
   assignOne(one,ZpD);
   assignOne(base,ZpD);
-  bigint   exp;
+  BigInt   exp;
   exp=(ZpD.pr-1)/m;
   assert(exp * m == ZpD.pr - 1);
   bool flag=true;

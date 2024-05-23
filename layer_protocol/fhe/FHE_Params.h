@@ -29,7 +29,7 @@ class FHE_Params
 
   // Data for distributed decryption
   int sec_p;
-  bigint Bval;
+  BigInt Bval;
   int matrix_dim;
 
   FFT_Data fd;
@@ -45,8 +45,8 @@ class FHE_Params
 
   int n_mults() const { return FFTData.size() - 1; }
 
-  void set(const Ring& R,const vector<bigint>& primes);
-  void set(const vector<bigint>& primes);
+  void set(const Ring& R,const vector<BigInt>& primes);
+  void set(const vector<BigInt>& primes);
   void set_sec(int sec);
   void set_min_sec(int sec);
 
@@ -56,12 +56,12 @@ class FHE_Params
 
   const vector<FFT_Data>& FFTD() const { return FFTData; }
 
-  const bigint& p0() const           { return FFTData[0].get_prime(); }
-  const bigint& p1() const           { return FFTData[1].get_prime(); }
-  bigint Q() const;
+  const BigInt& p0() const           { return FFTData[0].get_prime(); }
+  const BigInt& p1() const           { return FFTData[1].get_prime(); }
+  BigInt Q() const;
 
   int secp() const                   { return sec_p;        }
-  const bigint& B() const            { return Bval;         }
+  const BigInt& B() const            { return Bval;         }
   double get_R() const               { return Chi.get_R();  }
   void set_R(double R) const         { return Chi.set(R); }
   DiscreteGauss get_DG() const       { return Chi; }
@@ -86,7 +86,7 @@ class FHE_Params
   template<class FD>
   const FD& get_plaintext_field_data() const;
 
-  bigint get_plaintext_modulus() const;
+  BigInt get_plaintext_modulus() const;
 };
 
 #endif

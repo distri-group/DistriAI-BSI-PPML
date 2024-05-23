@@ -394,8 +394,8 @@ void MultiEncCommit<FD>::add_ciphertexts(vector<Ciphertext>& ciphertexts,
                 ciphertexts.at(i), generator.b_mod_q.at(i));
 }
 
-template class SimpleEncCommitBase<gfp, FFT_Data, bigint>;
-template class SimpleEncCommit<gfp, FFT_Data, bigint>;
+template class SimpleEncCommitBase<gfp, FFT_Data, BigInt>;
+template class SimpleEncCommit<gfp, FFT_Data, BigInt>;
 template class SimpleEncCommitFactory<FFT_Data>;
 template class SummingEncCommit<FFT_Data>;
 template class NonInteractiveProofSimpleEncCommit<FFT_Data>;

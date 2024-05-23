@@ -32,11 +32,11 @@ public:
     FHE_PK pk;
     Ciphertext enc_dash;
     Ciphertext enc;
-    bigint p;
+    BigInt p;
 
-    static void fake(FHE_PK& pk, vector<FHE_SK>& sks, const bigint& p, int nparties);
+    static void fake(FHE_PK& pk, vector<FHE_SK>& sks, const BigInt& p, int nparties);
 
-    DistKeyGen(const FHE_Params& params, const bigint& p);
+    DistKeyGen(const FHE_Params& params, const BigInt& p);
     void Gen_Random_Data(PRNG& G);
     DistKeyGen& operator+=(const DistKeyGen& other);
     void sum_a(const vector<Rq_Element>& as);

@@ -24,7 +24,7 @@
 template<class T>
 void* run_ot_thread(void* ptr)
 {
-    bigint::init_thread();
+    BigInt::init_thread();
     ((OTMultiplierBase*)ptr)->multiply();
     return NULL;
 }
@@ -173,7 +173,7 @@ typename T::Multiplier* OTTripleGenerator<T>::new_multiplier(int i)
 template<class T>
 void NPartyTripleGenerator<T>::generate()
 {
-    bigint::init_thread();
+    BigInt::init_thread();
 
     auto& timers = this->timers;
     auto& machine = this->machine;

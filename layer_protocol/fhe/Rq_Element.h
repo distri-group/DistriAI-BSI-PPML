@@ -25,7 +25,7 @@ class Rq_Element;
 void add(Rq_Element& ans,const Rq_Element& a,const Rq_Element& b);
 void sub(Rq_Element& ans,const Rq_Element& a,const Rq_Element& b);
 void mul(Rq_Element& ans,const Rq_Element& a,const Rq_Element& b);
-void mul(Rq_Element& ans,const Rq_Element& a,const bigint& b);
+void mul(Rq_Element& ans,const Rq_Element& a,const BigInt& b);
 
 class Rq_Element
 {
@@ -95,7 +95,7 @@ protected:
   friend void add(Rq_Element& ans,const Rq_Element& a,const Rq_Element& b);
   friend void sub(Rq_Element& ans,const Rq_Element& a,const Rq_Element& b);
   friend void mul(Rq_Element& ans,const Rq_Element& a,const Rq_Element& b);
-  friend void mul(Rq_Element& ans,const Rq_Element& a,const bigint& b);
+  friend void mul(Rq_Element& ans,const Rq_Element& a,const BigInt& b);
 
   template<class S>
   Rq_Element& operator+=(const vector<S>& other);
@@ -115,7 +115,7 @@ protected:
   void randomize(PRNG& G,int lev=-1);
 
   // Scale from level 1 to level 0, if at level 0 do nothing
-  void Scale(const bigint& p);
+  void Scale(const BigInt& p);
 
   bool equals(const Rq_Element& a) const;
   bool operator==(const Rq_Element& a) const { return equals(a); }
@@ -129,9 +129,9 @@ protected:
   void set_level(int level) { lev = (level == -1 ? n_mults() : level); }
   void partial_assign(const Rq_Element& a, const Rq_Element& b);
 
-  // Converting to and from a vector of bigint's Again I/O is in poly rep
-  vector<bigint>  to_vec_bigint() const;
-  void to_vec_bigint(vector<bigint>& v) const;
+  // Converting to and from a vector of BigInt's Again I/O is in poly rep
+  vector<BigInt>  to_vec_bigint() const;
+  void to_vec_bigint(vector<BigInt>& v) const;
 
   ConversionIterator get_iterator() const;
   template <class T>
@@ -145,13 +145,13 @@ protected:
       from(Iterator<T>(source), level);
     }
 
-  bigint infinity_norm() const;
+  BigInt infinity_norm() const;
 
-  bigint get_prime(int i) const
+  BigInt get_prime(int i) const
     { return a[i].get_prime(); }
 
-  bigint get_modulus() const
-    { bigint ans=1;
+  BigInt get_modulus() const
+    { BigInt ans=1;
       for(int i=0; i<=lev; ++i) ans*=a[i].get_prime();
       return ans;
     }
@@ -177,7 +177,7 @@ protected:
 };
    
 template<int L>
-inline void mul(Rq_Element& ans,const bigint& a,const Rq_Element& b)
+inline void mul(Rq_Element& ans,const BigInt& a,const Rq_Element& b)
 { mul(ans,b,a); }
 
 template<class S>

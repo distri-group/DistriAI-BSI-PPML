@@ -101,7 +101,7 @@ void mul(Rq_Element& ans,const Rq_Element& a,const Rq_Element& b)
   }
 }
 
-void mul(Rq_Element& ans,const Rq_Element& a,const bigint& b)
+void mul(Rq_Element& ans,const Rq_Element& a,const BigInt& b)
 {
   ans.partial_assign(a);
   modp bp;
@@ -128,20 +128,20 @@ bool Rq_Element::equals(const Rq_Element& other) const
 }
 
 
-vector<bigint> Rq_Element::to_vec_bigint() const
+vector<BigInt> Rq_Element::to_vec_bigint() const
 {
-  vector<bigint> v;
+  vector<BigInt> v;
   to_vec_bigint(v);
   return v;
 }
 
 // Doing sort of CRT;
 // result mod p0 = a[0]; result mod p1 = a[1]
-void Rq_Element::to_vec_bigint(vector<bigint>& v) const
+void Rq_Element::to_vec_bigint(vector<BigInt>& v) const
 {
   a[0].to_vec_bigint(v);
   if (n_mults() == 0) {
-	  bigint p0 = a[0].get_prime();
+	  BigInt p0 = a[0].get_prime();
 	  for (size_t i = 0; i < v.size(); ++i) {
 		  if (v[i] > p0 / 2) {
 			  v[i] = (v[i] - p0);
@@ -149,12 +149,12 @@ void Rq_Element::to_vec_bigint(vector<bigint>& v) const
 	  }
   }
   if (lev==1)
-    { vector<bigint> v1;
+    { vector<BigInt> v1;
       a[1].to_vec_bigint(v1);
       assert(v.size() == v1.size());
-      bigint p0=a[0].get_prime();
-      bigint p1=a[1].get_prime();
-      bigint p0i,lambda,Q=p0*p1;
+      BigInt p0=a[0].get_prime();
+      BigInt p1=a[1].get_prime();
+      BigInt p0i,lambda,Q=p0*p1;
       invMod(p0i,p0%p1,p1);
       for (unsigned int i=0; i<v.size(); i++)
 	{ lambda=((v1[i]-v[i])*p0i)%Q;
@@ -170,15 +170,15 @@ ConversionIterator Rq_Element::get_iterator() const
   return a[0].get_iterator();
 }
 
-bigint Rq_Element::infinity_norm() const
+BigInt Rq_Element::infinity_norm() const
 {
-  bigint Q = 1, ans = 0;
+  BigInt Q = 1, ans = 0;
   for (int i = 0; i <= n_mults(); ++i)
   {
 	  Q *= a[i].get_prime();
   }
-  bigint t;
-  vector<bigint> te=to_vec_bigint();
+  BigInt t;
+  vector<BigInt> te=to_vec_bigint();
   for (unsigned int i=0; i<te.size(); i++)
     { // Take rounded value and then abs value
       if (te[i]<Q/2) { t=te[i]; }
@@ -201,18 +201,18 @@ void Rq_Element::change_rep(RepType r0,RepType r1)
   a[1].change_rep(r1);
 }
 
-void Rq_Element::Scale(const bigint& p)
+void Rq_Element::Scale(const BigInt& p)
 {
   if (lev==0) { return; }
   if (n_mults() == 0) {
 	  //for some reason we scale but we have just one level
 	  throw level_mismatch();
   }
-  bigint p0=a[0].get_prime(),p1=a[1].get_prime(),p1i,lambda,n=p1*p;
+  BigInt p0=a[0].get_prime(),p1=a[1].get_prime(),p1i,lambda,n=p1*p;
   invMod(p1i,p1%p,p);
 
   // First multiply input by [p1]_p
-  bigint te=p1%p;
+  BigInt te=p1%p;
   if (te>p/2) { te-=p; }
   modp tep;
   to_modp(tep,te,a[0].get_prD());
@@ -230,8 +230,8 @@ void Rq_Element::Scale(const bigint& p)
     auto it = poly_a1.get_iterator();
     auto it0 = b0.get_write_iterator();
     auto it1 = b1.get_write_iterator();
-    bigint half_n = n / 2;
-    bigint delta;
+    BigInt half_n = n / 2;
+    BigInt delta;
     for (int i=0; i < a[1].get_FFTD().phi_m(); i++)
       {
         it.get(delta);
@@ -265,7 +265,7 @@ void Rq_Element::mul_by_p1()
 
   if (n_mults() == 0) {throw level_mismatch();}
   lev=1;
-  bigint m=a[1].get_prime()%a[0].get_prime();
+  BigInt m=a[1].get_prime()%a[0].get_prime();
   modp mp;
   to_modp(mp,m,a[0].get_prD());
   mul(a[0],a[0],mp);
@@ -352,7 +352,7 @@ void Rq_Element::unpack(octetStream& o, const FHE_Params& params)
 
 void Rq_Element::print_first_non_zero() const
 {
-  vector<bigint> v = to_vec_bigint();
+  vector<BigInt> v = to_vec_bigint();
   size_t i;
   for (i = 0; i < v.size(); i++)
   {
@@ -367,5 +367,5 @@ void Rq_Element::print_first_non_zero() const
   cout << endl;
 }
 
-template void Rq_Element::from<bigint>(const Generator<bigint>&, int);
+template void Rq_Element::from<BigInt>(const Generator<BigInt>&, int);
 template void Rq_Element::from<int>(const Generator<int>&, int);

@@ -20,7 +20,7 @@ class FHE_SK
 {
   Rq_Element sk;
   const FHE_Params *params;
-  bigint pr;
+  BigInt pr;
 
   public:
 
@@ -28,14 +28,14 @@ class FHE_SK
 
   const FHE_Params& get_params() const { return *params; }
 
-  bigint p() const { return pr; }
+  BigInt p() const { return pr; }
 
   // secret key always on lower level
   void assign(const Rq_Element& s) { sk=s; sk.lower_level(); }
 
   FHE_SK(const FHE_Params& pms);
 
-  FHE_SK(const FHE_Params& pms, const bigint& p)
+  FHE_SK(const FHE_Params& pms, const BigInt& p)
     : sk(pms.FFTD(),evaluation,evaluation) { params=&pms; pr=p; }
 
   FHE_SK(const FHE_PK& pk);
@@ -74,8 +74,8 @@ class FHE_SK
   //  - Third stage outputs the message by executing
   //        mess.set_poly_mod(vv,mod)  
   //    where mod p0 and mess is Plaintext<T,FD,S>
-  void dist_decrypt_1(vector<bigint>& vv,const Ciphertext& ctx,int player_number,int num_players) const;
-  void dist_decrypt_2(vector<bigint>& vv,const vector<bigint>& vv1) const;
+  void dist_decrypt_1(vector<BigInt>& vv,const Ciphertext& ctx,int player_number,int num_players) const;
+  void dist_decrypt_2(vector<BigInt>& vv,const vector<BigInt>& vv1) const;
   
   friend void KeyGen(FHE_PK& PK,FHE_SK& SK,PRNG& G);
   
@@ -89,12 +89,12 @@ class FHE_SK
 
   bool operator!=(const FHE_SK& x) const { return pr != x.pr or sk != x.sk; }
 
-  void check(const FHE_Params& params, const FHE_PK& pk, const bigint& pr) const;
+  void check(const FHE_Params& params, const FHE_PK& pk, const BigInt& pr) const;
 
   template<class FD>
   void check(const FHE_PK& pk, const FD& FieldD);
 
-  bigint get_noise(const Ciphertext& c);
+  BigInt get_noise(const Ciphertext& c);
 
   friend ostream& operator<<(ostream& o, const FHE_SK&) { throw not_implemented(); return o; }
 };
@@ -108,13 +108,13 @@ class FHE_PK
   Rq_Element a0,b0;
   Rq_Element Sw_a,Sw_b;
   const FHE_Params *params;
-  bigint pr;
+  BigInt pr;
 
   public:
 
   const FHE_Params& get_params() const { return *params; }
 
-  bigint p() const { return pr; }
+  BigInt p() const { return pr; }
 
   void assign(const Rq_Element& a,const Rq_Element& b,
               const Rq_Element& sa,const Rq_Element& sb
@@ -126,7 +126,7 @@ class FHE_PK
 
   FHE_PK(const FHE_Params& pms);
 
-  FHE_PK(const FHE_Params& pms, const bigint& p)
+  FHE_PK(const FHE_Params& pms, const BigInt& p)
     : a0(pms.FFTD(),evaluation,evaluation),
       b0(pms.FFTD(),evaluation,evaluation),
       Sw_a(pms.FFTD(),evaluation,evaluation), 
@@ -134,7 +134,7 @@ class FHE_PK
        { params=&pms; pr=p; }
 
   FHE_PK(const FHE_Params& pms, int p) :
-      FHE_PK(pms, bigint(p))
+      FHE_PK(pms, BigInt(p))
   {
   }
 
@@ -188,7 +188,7 @@ class FHE_PK
   
   bool operator!=(const FHE_PK& x) const;
 
-  void check(const FHE_Params& params, const bigint& pr) const;
+  void check(const FHE_Params& params, const BigInt& pr) const;
 };
 
 
@@ -207,7 +207,7 @@ public:
   /// Secret key
   FHE_SK sk;
 
-  FHE_KeyPair(const FHE_Params& params, const bigint& pr) :
+  FHE_KeyPair(const FHE_Params& params, const BigInt& pr) :
       pk(params, pr), sk(params, pr)
   {
   }

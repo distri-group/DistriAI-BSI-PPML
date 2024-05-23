@@ -51,7 +51,7 @@ Rq_Element FHE_PK::sample_secret_key(PRNG& G)
 {
   Rq_Element sk = FHE_SK(*this).s();
   // Generate the secret key
-  sk.from(GaussianGenerator<bigint>(params->get_DG(), G));
+  sk.from(GaussianGenerator<BigInt>(params->get_DG(), G));
   return sk;
 }
 
@@ -71,7 +71,7 @@ void FHE_PK::partial_key_gen(const Rq_Element& sk, const Rq_Element& a, PRNG& G,
 
   // b0=a0*s+p*e0
   Rq_Element e0((*PK.params).FFTD(),evaluation,evaluation);
-  e0.from(GaussianGenerator<bigint>(params->get_DG(), G, noise_boost));
+  e0.from(GaussianGenerator<BigInt>(params->get_DG(), G, noise_boost));
   mul(PK.b0,PK.a0,sk);
   mul(e0,e0,PK.pr);
   add(PK.b0,PK.b0,e0);
@@ -88,7 +88,7 @@ void FHE_PK::partial_key_gen(const Rq_Element& sk, const Rq_Element& a, PRNG& G,
 
       // bs=as*s+p*es
       Rq_Element es((*PK.params).FFTD(),evaluation,evaluation);
-      es.from(GaussianGenerator<bigint>(params->get_DG(), G, noise_boost));
+      es.from(GaussianGenerator<BigInt>(params->get_DG(), G, noise_boost));
       mul(PK.Sw_b,PK.Sw_a,sk);
       mul(es,es,PK.pr);
       add(PK.Sw_b,PK.Sw_b,es);
@@ -112,8 +112,8 @@ void FHE_PK::check_noise(const FHE_SK& SK) const
 void FHE_PK::check_noise(const Rq_Element& x, bool check_modulo) const
 {
   assert(pr != 0);
-  vector<bigint> noise = x.to_vec_bigint();
-  bigint m = 0;
+  vector<BigInt> noise = x.to_vec_bigint();
+  BigInt m = 0;
   if (check_modulo)
     cout << "checking multiplicity of noise" << endl;
   for (size_t i = 0; i < noise.size(); i++)
@@ -253,7 +253,7 @@ void FHE_SK::decrypt_any(Plaintext_<FD>& res, const Ciphertext& c)
 
 
 /* Distributed Decryption Stuff */
-void FHE_SK::dist_decrypt_1(vector<bigint>& vv,const Ciphertext& ctx,int player_number,int num_players) const
+void FHE_SK::dist_decrypt_1(vector<BigInt>& vv,const Ciphertext& ctx,int player_number,int num_players) const
 {
   // Need Ciphertext to be at level 0, so we force this here
   Ciphertext cc=ctx; cc.Scale(pr);
@@ -265,18 +265,18 @@ void FHE_SK::dist_decrypt_1(vector<bigint>& vv,const Ciphertext& ctx,int player_
   else
     { dec_sh.negate(); }
 
-  // Now convert to a vector of bigint's and add the required randomness
+  // Now convert to a vector of BigInt's and add the required randomness
   assert(pr != 0);
-  bigint Bd=((*params).B()<<(*params).secp())/(num_players*pr);
+  BigInt Bd=((*params).B()<<(*params).secp())/(num_players*pr);
   Bd=Bd/2; // make slightly smaller due to rounding issues
 
   dec_sh.to_vec_bigint(vv);
   if ((int)vv.size() != params->phi_m())
     throw length_error("wrong length of ring element");
-  bigint mod=(*params).p0();
+  BigInt mod=(*params).p0();
   PRNG G;  G.ReSeed();
-  bigint mask;
-  bigint two_Bd = 2 * Bd;
+  BigInt mask;
+  BigInt two_Bd = 2 * Bd;
   for (int i=0; i<(*params).phi_m(); i++)
     {
       G.randomBnd(mask, two_Bd);
@@ -289,9 +289,9 @@ void FHE_SK::dist_decrypt_1(vector<bigint>& vv,const Ciphertext& ctx,int player_
 }
 
 
-void FHE_SK::dist_decrypt_2(vector<bigint>& vv,const vector<bigint>& vv1) const
+void FHE_SK::dist_decrypt_2(vector<BigInt>& vv,const vector<BigInt>& vv1) const
 {
-  bigint mod=(*params).p0();
+  BigInt mod=(*params).p0();
   for (int i=0; i<(*params).phi_m(); i++)
     {
       vv[i] += vv1[i];
@@ -342,7 +342,7 @@ bool FHE_PK::operator!=(const FHE_PK& x) const
 }
 
 void FHE_SK::check(const FHE_Params& params, const FHE_PK& pk,
-        const bigint& pr) const
+        const BigInt& pr) const
 {
   if (this->params != &params)
     throw params_mismatch();
@@ -363,7 +363,7 @@ void FHE_SK::check(const FHE_PK& pk, const FD& FieldD)
     throw runtime_error("incorrect key pair");
 }
 
-void FHE_PK::check(const FHE_Params& params, const bigint& pr) const
+void FHE_PK::check(const FHE_Params& params, const BigInt& pr) const
 {
   if (this->pr != pr)
     throw pr_mismatch();
@@ -377,16 +377,16 @@ void FHE_PK::check(const FHE_Params& params, const bigint& pr) const
     }
 }
 
-bigint FHE_SK::get_noise(const Ciphertext& c)
+BigInt FHE_SK::get_noise(const Ciphertext& c)
 {
   sk.lower_level();
   Ciphertext cc = c;
   if (cc.level())
     cc.Scale();
   Rq_Element tmp = quasi_decrypt(cc);
-  bigint res;
-  bigint q = tmp.get_modulus();
-  bigint half_q = q / 2;
+  BigInt res;
+  BigInt q = tmp.get_modulus();
+  BigInt half_q = q / 2;
   for (auto& x : tmp.to_vec_bigint())
     {
 //      cout << numBits(x) << "/" << (x > half_q) << "/" << (x < 0) << " ";

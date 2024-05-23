@@ -11,7 +11,7 @@ using namespace std;
 
 void ident(matrix& U,int n)
 {
-  U.resize(n, vector<bigint>(n) );
+  U.resize(n, vector<BigInt>(n) );
   for (int i=0; i<n; i++)
     { for (int j=0; j<n; j++)
         { U[i][j]=0; }
@@ -36,7 +36,7 @@ void ident(imatrix& U,int n)
 matrix transpose(const matrix& A)
 {
   int m=A.size(),n=A[0].size();
-  matrix B(n, vector<bigint>(m) );
+  matrix B(n, vector<BigInt>(m) );
   for (int i=0; i<m; i++)
     { for (int j=0; j<n; j++)
         { B[j][i]=A[i][j]; }
@@ -49,7 +49,7 @@ matrix Mul(const matrix& A,const matrix& B)
 {
   unsigned int m=A.size(),n=B[0].size(),t=A[0].size();
   if (t!=B.size()) { throw invalid_length(); }
-  matrix C(m, vector<bigint>(n) );
+  matrix C(m, vector<BigInt>(n) );
   for (unsigned int i=0; i<m; i++)
     { for (unsigned int j=0; j<n; j++)
 	{ C[i][j]=0;
@@ -77,13 +77,13 @@ void HNF(matrix& H,matrix& U,const matrix& A)
   r=min(m,n);
   i=0;
   bool flag=true;
-  bigint mn,te;
+  BigInt mn,te;
   int step=2;
   while (flag)
     { if (step==2)
         { // Step 2
           k=-1;
-          mn=bigint(0);
+          mn=BigInt(0);
           for (j=i; j<n; j++)
 	    { if (H[i][j]!=0 && (abs(H[i][j])<mn || mn == 0))
 	        { k=j; mn=abs(H[i][j]); }

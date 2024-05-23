@@ -51,7 +51,7 @@ int generate_semi_setup(int plaintext_length, int sec,
 {
   int m = 1024;
   int lgp = plaintext_length;
-  bigint p;
+  BigInt p;
   generate_prime(p, lgp, m);
   int lgp0, lgp1;
   FHE_Params tmp_params;
@@ -60,7 +60,7 @@ int generate_semi_setup(int plaintext_length, int sec,
       tmp_params = params;
       SemiHomomorphicNoiseBounds nb(p, phi_N(m), n, sec,
           numBits(NonInteractiveProof::slack(sec, phi_N(m))), true, tmp_params);
-      bigint p1 = 2 * p * m, p0 = p;
+      BigInt p1 = 2 * p * m, p0 = p;
       while (nb.min_p0(params.n_mults() > 0, p1) > p0)
         {
           p0 *= 2;
@@ -105,7 +105,7 @@ int generate_semi_setup(int plaintext_length, int sec,
   return extra_slack;
 }
 
-int common_semi_setup(FHE_Params& params, int m, bigint p, int& lgp0, int lgp1, bool round_up)
+int common_semi_setup(FHE_Params& params, int m, BigInt p, int& lgp0, int lgp1, bool round_up)
 {
 #ifdef VERBOSE
   cout << "Need ciphertext modulus of length " << lgp0;
@@ -135,7 +135,7 @@ int common_semi_setup(FHE_Params& params, int m, bigint p, int& lgp0, int lgp1, 
 
   Ring R;
   ::init(R, m);
-  bigint p0, p1 = 1;
+  BigInt p0, p1 = 1;
   if (params.n_mults() > 0)
   {
     generate_moduli(p0, p1, m, p, lgp0, lgp1);
@@ -197,7 +197,7 @@ int finalize_lengths(int& lg2p0, int& lg2p1, int n, int m, int* lg2pi,
 /*
  * Subroutine for creating the FHE parameters
  */
-int Parameters::BSI_Data_Setup_Char_p_Sub(int idx, int& m, bigint& p,
+int Parameters::BSI_Data_Setup_Char_p_Sub(int idx, int& m, BigInt& p,
     FHE_Params& params)
 {
   int n = n_parties;
@@ -255,27 +255,27 @@ int Parameters::BSI_Data_Setup_Char_p_Sub(int idx, int& m, bigint& p,
   return extra_slack;
 }
 
-void generate_moduli(bigint& pr0, bigint& pr1, const int m, const bigint p,
+void generate_moduli(BigInt& pr0, BigInt& pr1, const int m, const BigInt p,
         const int lg2p0, const int lg2p1)
 {
   generate_modulus(pr0, m, p, lg2p0, "0");
   generate_modulus(pr1, m, p, lg2p1, "1", pr0);
 }
 
-void generate_modulus(bigint& pr, const int m, const bigint p, const int lg2pr,
-    const string& i, const bigint& pr0)
+void generate_modulus(BigInt& pr, const int m, const BigInt p, const int lg2pr,
+    const string& i, const BigInt& pr0)
 {
   (void) i;
 
   if (lg2pr==0) { throw invalid_params(); }
 
-  bigint step=m;
-  bigint twop=1<<(numBits(m)+1);
-  bigint gc=gcd(step,twop);
+  BigInt step=m;
+  BigInt twop=1<<(numBits(m)+1);
+  BigInt gc=gcd(step,twop);
   step=step*twop/gc;
 
   step *= p;
-  pr = (bigint(1) << lg2pr) / step * step + 1;
+  pr = (BigInt(1) << lg2pr) / step * step + 1;
 
   while (pr == pr0 || !probPrime(pr))
     {
@@ -299,7 +299,7 @@ void generate_modulus(bigint& pr, const int m, const bigint p, const int lg2pr,
 template <>
 void Parameters::BSI_Data_Setup(FHE_Params& params, FFT_Data& FTD)
 {
-  bigint p;
+  BigInt p;
   int idx, m;
   BSI_Data_Setup_Primes(p, plaintext_length, idx, m);
   BSI_Data_Setup_Char_p_Sub(idx, m, p, params);
@@ -709,7 +709,7 @@ void Parameters::BSI_Data_Setup(FHE_Params& params, P2Data& P2D)
   // unity and twop'th roots of unity. This means FFT's are easier
   // to implement
   int lg2m=numBits(m);
-  bigint step=m<<(lg2m+1);
+  BigInt step=m<<(lg2m+1);
   
   ex=lg2p0-2*lg2m;
   pr0=1; pr0=(pr0<<ex)*step+1;

@@ -11,24 +11,24 @@ DistDecrypt<FD>::DistDecrypt(const Player& P, const FHE_SK& share,
   vv.resize(pk.get_params().phi_m());
   vv1.resize(pk.get_params().phi_m());
   // extra limb for operations
-  bigint limit = pk.get_params().Q() << 64;
+  BigInt limit = pk.get_params().Q() << 64;
   vv.allocate_slots(limit);
   vv1.allocate_slots(limit);
   mf.allocate_slots(pk.p() << 64);
 }
 
-class ModuloTreeSum : public TreeSum<bigint>
+class ModuloTreeSum : public TreeSum<BigInt>
 {
-  bigint modulo;
+  BigInt modulo;
 
-  void post_add_process(vector<bigint>& values)
+  void post_add_process(vector<BigInt>& values)
   {
     for (auto& v : values)
       v %= modulo;
   }
 
 public:
-  ModuloTreeSum(bigint modulo) :
+  ModuloTreeSum(BigInt modulo) :
       modulo(modulo)
   {
   }
@@ -78,7 +78,7 @@ Plaintext_<FD>& DistDecrypt<FD>::run(const Ciphertext& ctx, bool NewCiphertext)
     }
 
   // Now get the final message
-  bigint mod=params.p0();
+  BigInt mod=params.p0();
   mf.set_poly_mod(vv,mod);
   return mf;
 }

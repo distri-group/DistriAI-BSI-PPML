@@ -10,7 +10,7 @@
 
 double Proof::dist = 0;
 
-bigint Proof::slack(int slack, int sec, int phim)
+BigInt Proof::slack(int slack, int sec, int phim)
 {
   switch (slack)
   {
@@ -29,7 +29,7 @@ bigint Proof::slack(int slack, int sec, int phim)
     default:
       if (slack < 0)
         throw runtime_error("slack type unknown");
-      return bigint(1) << slack;
+      return BigInt(1) << slack;
   }
 }
 
@@ -128,12 +128,12 @@ bool Proof::check_bounds(T& z, X& t, int i) const
   return true;
 }
 
-Proof::Preimages::Preimages(int size, const FHE_PK& pk, const bigint& p, int n_players) :
+Proof::Preimages::Preimages(int size, const FHE_PK& pk, const BigInt& p, int n_players) :
     r(size, pk.get_params())
 {
   m.resize(size, pk.get_params().phi_m());
   // extra limb for addition
-  bigint limit = p << (64 + n_players);
+  BigInt limit = p << (64 + n_players);
   m.allocate_slots(limit);
   r.allocate_slots(n_players);
   m_tmp = m[0][0];

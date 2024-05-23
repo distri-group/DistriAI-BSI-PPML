@@ -39,7 +39,7 @@ class FFT_Data
 
   public:
   typedef gfp T;
-  typedef bigint S;
+  typedef BigInt S;
   typedef fixint<gfpvar::N_LIMBS> poly_type;
 
   void init(const Ring& Rg,const Zp_Data& PrD);
@@ -55,7 +55,7 @@ class FFT_Data
     { init(Rg,PrD); }
 
   const Zp_Data& get_prD() const        { return prData; }
-  const bigint&  get_prime() const      { return prData.pr; }
+  const BigInt&  get_prime() const      { return prData.pr; }
   int phi_m() const                     { return R.phi_m(); }
   int m()     const                     { return R.m();   }
   int num_slots() const                 { return R.phi_m(); }

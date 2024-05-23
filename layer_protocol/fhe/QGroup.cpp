@@ -1,7 +1,7 @@
 
 #include "Matrix.h"
 #include "QGroup.h"
-#include "Math/bigint.h"
+#include "Math/BigInt.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -25,7 +25,7 @@ void QGroup::assign(int mm,int seed)
           npr++;
         }
     }
-  matrix A(npr*2, vector<bigint>(npr));
+  matrix A(npr*2, vector<BigInt>(npr));
   int i,j,te,ord,e;
 
   /* Basic relations...*/
@@ -74,14 +74,14 @@ void QGroup::assign(int mm,int seed)
   cout << "Quotient Group Generators :\n";
   g.resize(npr); d.resize(npr);
   ngen=0;  Gord=1;
-  bigint temp;
+  BigInt temp;
   for (i=0; i<npr; i++)
     { if (S[i][i]!=1)
 	{ temp=1;
           for (j=0; j<npr; j++)
             { temp=(temp*powerMod(pr[j],Vi[i][j],m))%m; }
-          g[ngen]=mpz_get_ui(temp.get_mpz_t());
-          d[ngen]=mpz_get_ui(S[i][i].get_mpz_t());
+          g[ngen]=thm_get_ui(temp.get_thm_t());
+          d[ngen]=thm_get_ui(S[i][i].get_thm_t());
 	  Gord=Gord*d[ngen];
 	  cout << "\t(" << g[ngen] << "," << d[ngen] << ")" << endl;
           ngen++;

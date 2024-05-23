@@ -154,7 +154,7 @@ void Processor<T>::inputb(typename T::Input& input, ProcessorBase& input_process
     {
         if (x.from == my_num)
         {
-            bigint whole_input = get_long_input<bigint>(x.params,
+            BigInt whole_input = get_long_input<BigInt>(x.params,
                     input_processor, interactive);
             for (int i = 0; i < DIV_CEIL(x.n_bits, dl); i++)
             {
@@ -207,12 +207,12 @@ void Processor<T>::inputbvec(typename T::Input& input, ProcessorBase& input_proc
 
         if (x.from == my_num)
         {
-            bigint whole_input = get_long_input<bigint>(x.params,
+            BigInt whole_input = get_long_input<BigInt>(x.params,
                     input_processor, interactive);
             for (int i = 0; i < x.n_bits; i++)
             {
                 auto& res = S[x.dest[i]];
-                res.my_input(input, bigint(whole_input >> (i)).get_si() & 1, 1);
+                res.my_input(input, BigInt(whole_input >> (i)).get_si() & 1, 1);
             }
         }
         else

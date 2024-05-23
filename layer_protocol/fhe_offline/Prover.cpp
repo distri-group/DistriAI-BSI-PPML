@@ -19,10 +19,10 @@ Prover<FD,U>::Prover(Proof& proof, const FD& FieldD) :
   t = s[0];
   z = y[0];
   // extra limb to prevent reallocation
-  t.allocate_slots(bigint(1) << (proof.B_rand_length + 64));
-  z.allocate_slots(bigint(1) << (proof.B_plain_length + 64));
-  s.allocate_slots(bigint(1) << proof.B_rand_length);
-  y.allocate_slots(bigint(1) << proof.B_plain_length);
+  t.allocate_slots(BigInt(1) << (proof.B_rand_length + 64));
+  z.allocate_slots(BigInt(1) << (proof.B_plain_length + 64));
+  s.allocate_slots(BigInt(1) << proof.B_rand_length);
+  y.allocate_slots(BigInt(1) << proof.B_plain_length);
 #endif
 }
 
@@ -173,7 +173,7 @@ void Prover<FD, U>::report_size(ReportType type, MemoryUsage& res)
 
 
 template class Prover<FFT_Data, Plaintext_<FFT_Data> >;
-//template class Prover<FFT_Data, AddableVector<bigint> >;
+//template class Prover<FFT_Data, AddableVector<BigInt> >;
 
 template class Prover<P2Data, Plaintext_<P2Data> >;
-//template class Prover<P2Data, AddableVector<bigint> >;
+//template class Prover<P2Data, AddableVector<BigInt> >;

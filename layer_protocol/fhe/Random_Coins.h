@@ -36,7 +36,7 @@ public:
 
 class Random_Coins
 {
-  typedef bigint T;
+  typedef BigInt T;
 
   Rq_Element uu,vv,ww;
   const FHE_Params *params;
@@ -86,7 +86,7 @@ class Random_Coins
     }
 
   // Generate all from Uniform in range (-B,...B)
-  void generateUniform(PRNG& G,const bigint& B1,const bigint& B2,const bigint& B3)
+  void generateUniform(PRNG& G,const BigInt& B1,const BigInt& B2,const BigInt& B3)
     {
       if (B1 == 0)
         uu.assign_zero();

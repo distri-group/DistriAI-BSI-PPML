@@ -93,7 +93,7 @@ template<class U, class V>
 template<class T>
 void Rectangle<U, V>::to(T& result)
 {
-	result = bigint(0);
+	result = BigInt(0);
 	for (int i = 0; i < min(N_ROWS, result.N_BITS); i++)
 	{
 		result += T(rows[i]) << i;

@@ -20,7 +20,7 @@ class Parameters
 
 public:
   Ring R;
-  bigint pr0, pr1;
+  BigInt pr0, pr1;
 
   Parameters(int n_parties, int plaintext_length, int sec, int slack = 0,
       bool round_up = false) :
@@ -39,7 +39,7 @@ public:
   template<class FD>
   void BSI_Data_Setup(FHE_Params& params, FD& FTD);
 
-  int BSI_Data_Setup_Char_p_Sub(int idx, int& m, bigint& p,
+  int BSI_Data_Setup_Char_p_Sub(int idx, int& m, BigInt& p,
       FHE_Params& params);
 
 };
@@ -54,7 +54,7 @@ int generate_semi_setup(int plaintext_length, int sec,
     FHE_Params& params, FD& FieldD, bool round_up, int n = 1);
 
 // field-independent semi-homomorphic setup
-int common_semi_setup(FHE_Params& params, int m, bigint p, int& lgp0, int lgp1,
+int common_semi_setup(FHE_Params& params, int m, BigInt p, int& lgp0, int lgp1,
     bool round_up);
 
 void init(Ring& Rg, int m, bool generate_poly);
@@ -68,11 +68,11 @@ class GF2X;
 NTL::GF2X get_F(const Ring& Rg);
 
 // generate moduli according to lengths and other parameters
-void generate_moduli(bigint& pr0, bigint& pr1, const int m,
-        const bigint p, const int lg2p0, const int lg2p1);
+void generate_moduli(BigInt& pr0, BigInt& pr1, const int m,
+        const BigInt p, const int lg2p0, const int lg2p1);
 
-void generate_modulus(bigint& pr, const int m, const bigint p, const int lg2pr,
-    const string& i = "0", const bigint& pr0 = 0);
+void generate_modulus(BigInt& pr, const int m, const BigInt p, const int lg2pr,
+    const string& i = "0", const BigInt& pr0 = 0);
 
 // pre-generated dimensions for characteristic 2
 void char_2_dimension(int& m, int& lg2);

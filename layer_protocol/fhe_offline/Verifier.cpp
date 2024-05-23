@@ -9,9 +9,9 @@ Verifier<FD>::Verifier(Proof& proof, const FD& FieldD) :
 {
 #ifdef LESS_ALLOC_MORE_MEM
   z.resize(proof.phim);
-  z.allocate_slots(bigint(1) << proof.B_plain_length);
+  z.allocate_slots(BigInt(1) << proof.B_plain_length);
   t.resize(3, proof.phim);
-  t.allocate_slots(bigint(1) << proof.B_rand_length);
+  t.allocate_slots(BigInt(1) << proof.B_rand_length);
 #endif
 }
 

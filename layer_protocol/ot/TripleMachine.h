@@ -24,7 +24,7 @@ class TripleMachine : public OfflineMachineBase, public MascotParams
     gfpvar1 mac_keyp;
     Z2<128> mac_keyz;
 
-    bigint prime;
+    BigInt prime;
 
     Player* player;
 

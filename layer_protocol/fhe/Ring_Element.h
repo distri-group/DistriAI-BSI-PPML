@@ -63,7 +63,7 @@ class Ring_Element
   void set_data(const FFT_Data& prd)   { FFTD=&prd; }
   const FFT_Data& get_FFTD() const     { assert(FFTD); return *FFTD; }
   const Zp_Data& get_prD() const   { return get_FFTD().get_prD(); }
-  const bigint&  get_prime() const { return get_FFTD().get_prime(); }
+  const BigInt&  get_prime() const { return get_FFTD().get_prime(); }
 
   void assign_zero();
   void assign_one();
@@ -102,11 +102,11 @@ class Ring_Element
   // This is a NOP in cases where we cannot do a FFT
   void change_rep(RepType r);
 
-  // Converting to and from a vector of bigint/int's 
+  // Converting to and from a vector of BigInt/int's 
   // I/O is assumed to be in poly rep, so from_vec it internally alters
   // the representation to the current representation
-  vector<bigint>  to_vec_bigint() const;
-  void to_vec_bigint(vector<bigint>& v) const;
+  vector<BigInt>  to_vec_bigint() const;
+  void to_vec_bigint(vector<BigInt>& v) const;
 
   ConversionIterator get_iterator() const;
 

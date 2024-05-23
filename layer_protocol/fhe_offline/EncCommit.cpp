@@ -182,7 +182,7 @@ void EncCommit<T,FD,S>::next_active(Plaintext<T,FD,S>& mess, vector<Ciphertext>&
   cnt--;
 }
 
-bool check_norm(const Rq_Element& value, const bigint& bound)
+bool check_norm(const Rq_Element& value, const BigInt& bound)
 {
   bool res = (value.infinity_norm() > bound);
   if (res)
@@ -198,13 +198,13 @@ void EncCommit<T,FD,S>::Create_More() const
 
   // Tweak by using p rather than p/2, as we do not center the ciphertexts
   int rhoi=(int) (6*params.get_R());
-  bigint comm = active_mask(params.phi_m(), b, t);
-  bigint Bound1=m[0].get_field().get_prime()*comm;
-  bigint Bound2=comm;
-  bigint Bound3=rhoi*comm;
-  bigint UBound1=2*(Bound1-m[0].get_field().get_prime());
-  bigint UBound2=2*(Bound2-1);
-  bigint UBound3=2*(Bound3-rhoi);
+  BigInt comm = active_mask(params.phi_m(), b, t);
+  BigInt Bound1=m[0].get_field().get_prime()*comm;
+  BigInt Bound2=comm;
+  BigInt Bound3=rhoi*comm;
+  BigInt UBound1=2*(Bound1-m[0].get_field().get_prime());
+  BigInt UBound2=2*(Bound2-1);
+  BigInt UBound3=2*(Bound3-rhoi);
 
   int my_num=(*P).my_num();
   /* First generate the good ciphertexts and messages for myself */
@@ -264,7 +264,7 @@ void EncCommit<T,FD,S>::Create_More() const
         { if (cond!=Full) 
              { throw not_implemented(); }
           else          
-             { m_Delta.from(UniformGenerator<bigint>(Gseed[i],numBits(Bound1))); }
+             { m_Delta.from(UniformGenerator<BigInt>(Gseed[i],numBits(Bound1))); }
           rc_Delta.generateUniform(Gseed[i],Bound2,Bound3,Bound3);
           Ciphertext Delta(params);
           (*pk).quasi_encrypt(Delta,m_Delta,rc_Delta);
@@ -321,7 +321,7 @@ void EncCommit<T,FD,S>::Create_More() const
                      if (cond!=Full) 
                         { throw not_implemented(); }
                      else   
-	                { mm.from(UniformGenerator<bigint>(G, numBits(Bound1))); }
+	                { mm.from(UniformGenerator<BigInt>(G, numBits(Bound1))); }
                      rr.generateUniform(G,Bound2,Bound3,Bound3);
                      (*pk).quasi_encrypt(cc,mm,rr);
                      occ.reset_write_head();
@@ -359,7 +359,7 @@ void EncCommit<T,FD,S>::Create_More() const
                 { throw not_implemented();
                 }
               else   
-	        { m_Delta.from(UniformGenerator<bigint>(G, numBits(Bound1))); }
+	        { m_Delta.from(UniformGenerator<BigInt>(G, numBits(Bound1))); }
               rc_Delta.generateUniform(G,Bound2,Bound3,Bound3);
               
               auto vm=m[i].get_iterator();
@@ -430,9 +430,9 @@ void EncCommit<T,FD,S>::Create_More() const
 }
 
 
-template class EncCommit<gfp,FFT_Data,bigint>;
+template class EncCommit<gfp,FFT_Data,BigInt>;
 template class EncCommit<gf2n_short,P2Data,int>;
 
-template class EncCommitBase<gfp,FFT_Data,bigint>;
+template class EncCommitBase<gfp,FFT_Data,BigInt>;
 template class EncCommitBase<gf2n_short,P2Data,int>;
 

@@ -26,7 +26,7 @@ void Encrypt_Rq_Element(Ciphertext& c,const Rq_Element& mess, const Random_Coins
 }
 
 
-void DistKeyGen::fake(FHE_PK& pk, vector<FHE_SK>& sks, const bigint& p, int nparties)
+void DistKeyGen::fake(FHE_PK& pk, vector<FHE_SK>& sks, const BigInt& p, int nparties)
 {
     vector<DistKeyGen> dkgs(nparties, {pk.get_params(), p});
     sks.resize(nparties, {pk.get_params(), p});
@@ -93,7 +93,7 @@ void DistKeyGen::fake(FHE_PK& pk, vector<FHE_SK>& sks, const bigint& p, int npar
 }
 
 
-DistKeyGen::DistKeyGen(const FHE_Params& params, const bigint& p) :
+DistKeyGen::DistKeyGen(const FHE_Params& params, const BigInt& p) :
         params(params), rc1(params), rc2(params), secret(params, evaluation,
                 evaluation), a(params, evaluation, evaluation), e(params,
                 evaluation, evaluation), b(params, evaluation, evaluation), pk(
@@ -106,11 +106,11 @@ DistKeyGen::DistKeyGen(const FHE_Params& params, const bigint& p) :
  */
 void DistKeyGen::Gen_Random_Data(PRNG& G)
 {
-    secret.from(GaussianGenerator<bigint>(params.get_DG(), G));
+    secret.from(GaussianGenerator<BigInt>(params.get_DG(), G));
     rc1.generate(G);
     rc2.generate(G);
     a.randomize(G);
-    e.from(GaussianGenerator<bigint>(params.get_DG(), G));
+    e.from(GaussianGenerator<BigInt>(params.get_DG(), G));
 }
 
 DistKeyGen& DistKeyGen::operator+=(const DistKeyGen& other)

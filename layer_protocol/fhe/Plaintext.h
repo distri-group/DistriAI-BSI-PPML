@@ -86,7 +86,7 @@ class Plaintext
 
   void allocate(PT_Type type) const;
   void allocate() const { allocate(type); }
-  void allocate_slots(const bigint& value);
+  void allocate_slots(const BigInt& value);
   int get_min_alloc();
 
   /**
@@ -140,17 +140,17 @@ class Plaintext
 
   Iterator<S> get_iterator() const { to_poly(); return b; }
 
-  void from(const Generator<bigint>& source) const;
+  void from(const Generator<BigInt>& source) const;
 
-  // This sets a poly from a vector of bigint's which needs centering
+  // This sets a poly from a vector of BigInt's which needs centering
   // modulo mod, before assigning (used in decryption)
   //    vv[i] is already assumed reduced modulo mod though but in 
   //    range [0,...,mod)
-  void set_poly_mod(const vector<bigint>& vv,const bigint& mod)
+  void set_poly_mod(const vector<BigInt>& vv,const BigInt& mod)
   {
-    set_poly_mod(Iterator<bigint>(vv), mod);
+    set_poly_mod(Iterator<BigInt>(vv), mod);
   }
-  void set_poly_mod(const Generator<bigint>& generator, const bigint& mod);
+  void set_poly_mod(const Generator<BigInt>& generator, const BigInt& mod);
 
   // Converts between Evaluation,Polynomial and Both representations
   //    Marked as const because does not change value, only changes the

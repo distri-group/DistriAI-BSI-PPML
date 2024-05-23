@@ -37,7 +37,7 @@ PairwiseGenerator<FD>::PairwiseGenerator(int thread_num,
     a.allocate_slots(FieldD.get_prime());
     b.allocate_slots(FieldD.get_prime());
     // extra limb for addition
-    c.allocate_slots((bigint)FieldD.get_prime() << 64);
+    c.allocate_slots((BigInt)FieldD.get_prime() << 64);
     b_mod_q.resize(n_ciphertexts,
     { machine.setup<FD>().params, evaluation, evaluation });
 }

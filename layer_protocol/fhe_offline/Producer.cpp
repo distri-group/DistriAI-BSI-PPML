@@ -412,7 +412,7 @@ void gfpBitProducer::run(const Player& P, const FHE_PK& pk,
     // Step j and k
     Share<gfp> a;
     gfp two_inv, zero;
-    two_inv = bigint((dd.f.get_field().get_prime() + 1) / 2);
+    two_inv = BigInt((dd.f.get_field().get_prime() + 1) / 2);
     zero.assign_zero();
     auto shared_one = Share<gfp>::constant(1, P.my_num(), alphai);
     bits.clear();
@@ -673,7 +673,7 @@ void InputProducer<FD>::clear_file(int my_num, int thread_num,
 }
 
 
-template class TripleProducer<gfp, FFT_Data, bigint>;
+template class TripleProducer<gfp, FFT_Data, BigInt>;
 template class TripleProducer<gf2n_short, P2Data, int>;
 template class Producer<FFT_Data>;
 template class Producer<P2Data>;

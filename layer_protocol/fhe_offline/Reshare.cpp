@@ -62,9 +62,9 @@ void Reshare(Plaintext<T,FD,S>& m,Ciphertext& cc,
 
 
 
-template void Reshare(Plaintext<gfp,FFT_Data,bigint>& m,Ciphertext& cc,
+template void Reshare(Plaintext<gfp,FFT_Data,BigInt>& m,Ciphertext& cc,
                       const Ciphertext& cm,bool NewCiphertext,
-                      const Player& P,EncCommitBase<gfp,FFT_Data,bigint>& EC,
+                      const Player& P,EncCommitBase<gfp,FFT_Data,BigInt>& EC,
                       const FHE_PK& pk,DistDecrypt<FFT_Data>& dd);
 
 template void Reshare(Plaintext<gf2n_short,P2Data,int>& m,Ciphertext& cc,
@@ -73,9 +73,9 @@ template void Reshare(Plaintext<gf2n_short,P2Data,int>& m,Ciphertext& cc,
                       const FHE_PK& pk,DistDecrypt<P2Data>& dd);
 
 
-template void Reshare(Plaintext<gfp,FFT_Data,bigint>& m,Ciphertext& cc,
+template void Reshare(Plaintext<gfp,FFT_Data,BigInt>& m,Ciphertext& cc,
                       const Ciphertext& cm,bool NewCiphertext,
-                      const Player& P,EncCommitBase<gfp,FFT_Data,bigint>& EC,
+                      const Player& P,EncCommitBase<gfp,FFT_Data,BigInt>& EC,
                       const FHE_PK& pk,const FHE_SK& share);
 
 template void Reshare(Plaintext<gf2n_short,P2Data,int>& m,Ciphertext& cc,

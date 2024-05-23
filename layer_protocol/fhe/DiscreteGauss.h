@@ -58,7 +58,7 @@ public:
   void get(T& x) const  { this->G.get(x, n_bits, positive); }
 };
 
-template<class T = bigint>
+template<class T = BigInt>
 class GaussianGenerator : public RandomGenerator<T>
 {
   DiscreteGauss DG;

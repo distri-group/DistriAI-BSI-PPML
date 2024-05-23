@@ -20,7 +20,7 @@ void FFT_Data::init(const Ring& Rg,const Zp_Data& PrD)
 
   // Find which case we are in 
   int hwt=Hwt(Rg.m());
-  bigint prm1=PrD.pr-1;
+  BigInt prm1=PrD.pr-1;
   twop=1<<(numBits(Rg.m())+1);
   if (hwt==1)
     { twop=0; }
@@ -40,7 +40,7 @@ void FFT_Data::init(const Ring& Rg,const Zp_Data& PrD)
         }
     }
   else 
-    { bigint pr=PrD.pr;
+    { BigInt pr=PrD.pr;
       if ((pr-1)%(2*Rg.m())!=0)
 	{ throw invalid_params(); }
       root[0]=Find_Primitive_Root_2m(Rg.m(),Rg.Phi(),PrD);
@@ -54,7 +54,7 @@ void FFT_Data::init(const Ring& Rg,const Zp_Data& PrD)
       b.resize(2,vector<modp>(ptwop));
 
       modp rInv,bi;
-      bigint ee=ptwop; ee=ee*Rg.m();
+      BigInt ee=ptwop; ee=ee*Rg.m();
       for (int r=0; r<2; r++)
         { assignOne(powers[r][0],PrD);
           if (r==0)

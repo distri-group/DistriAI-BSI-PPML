@@ -33,7 +33,7 @@ public:
     {
     }
 
-    void allocate_slots(const bigint& init)
+    void allocate_slots(const BigInt& init)
     {
         for (auto& x: *this)
             x.allocate_slots(init);

@@ -17,7 +17,7 @@ protected:
   const Player& P;
   const FHE_SK& share;
   const FHE_PK& pk;
-  AddableVector<bigint> vv, vv1;
+  AddableVector<BigInt> vv, vv1;
 
 public:
   Plaintext_<FD> mf, f;

@@ -12,7 +12,7 @@ FHE_Params::FHE_Params(int n_mults, int drown_sec) :
 }
 
 void FHE_Params::set(const Ring& R,
-                     const vector<bigint>& primes)
+                     const vector<BigInt>& primes)
 {
   if (primes.size() != FFTData.size())
     throw runtime_error("wrong number of primes");
@@ -51,9 +51,9 @@ void FHE_Params::set_matrix_dim_from_options()
           1 : OnlineOptions::singleton.batch_size);
 }
 
-bigint FHE_Params::Q() const
+BigInt FHE_Params::Q() const
 {
-  bigint res = FFTData[0].get_prime();
+  BigInt res = FFTData[0].get_prime();
   for (size_t i = 1; i < FFTData.size(); i++)
     res *= FFTData[i].get_prime();
   return res;
@@ -119,7 +119,7 @@ const P2Data& FHE_Params::get_plaintext_field_data() const
   throw not_implemented();
 }
 
-bigint FHE_Params::get_plaintext_modulus() const
+BigInt FHE_Params::get_plaintext_modulus() const
 {
   return fd.get_prime();
 }

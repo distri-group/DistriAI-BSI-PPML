@@ -120,7 +120,7 @@ void Ciphertext::rerandomize(const FHE_PK& pk)
   Rq_Element tmp(*params);
   SeededPRNG G;
   vector<FFT_Data::S> r(params->FFTD()[0].phi_m());
-  bigint p = pk.p();
+  BigInt p = pk.p();
   assert(p != 0);
   for (auto& x : r)
     {
@@ -136,6 +136,6 @@ void Ciphertext::rerandomize(const FHE_PK& pk)
 }
 
 
-template void mul(Ciphertext& ans,const Plaintext<gfp,FFT_Data,bigint>& a,const Ciphertext& c);
+template void mul(Ciphertext& ans,const Plaintext<gfp,FFT_Data,BigInt>& a,const Ciphertext& c);
 template void mul(Ciphertext& ans, const Plaintext<gf2n_short, P2Data, int>& a,
         const Ciphertext& c);

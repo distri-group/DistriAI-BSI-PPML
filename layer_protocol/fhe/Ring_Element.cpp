@@ -466,16 +466,16 @@ RingWriteIterator Ring_Element::get_write_iterator()
   return *this;
 }
 
-vector<bigint>  Ring_Element::to_vec_bigint() const
+vector<BigInt>  Ring_Element::to_vec_bigint() const
 {
   assert(FFTD);
-  vector<bigint> v;
+  vector<BigInt> v;
   to_vec_bigint(v);
   return v;
 }
 
 
-void Ring_Element::to_vec_bigint(vector<bigint>& v) const
+void Ring_Element::to_vec_bigint(vector<BigInt>& v) const
 {
   assert(FFTD);
   v.resize(FFTD->phi_m());
@@ -616,5 +616,5 @@ size_t Ring_Element::report_size(ReportType type) const
     return sizeof(mp_limb_t) * (*FFTD).get_prD().get_t() * element.size();
 }
 
-template void Ring_Element::from(const Generator<bigint>& generator);
+template void Ring_Element::from(const Generator<BigInt>& generator);
 template void Ring_Element::from(const Generator<int>& generator);
