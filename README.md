@@ -38,7 +38,7 @@ The machine learning component layer implements  machine  learning algorithm  co
 
 # The main process
 ## The process of data input
-<img style="text-align:center;width:100%" src="docs/img/input_data.png">
+<img style="text-align:center;width:100%" src="docs/img/data_input.png">
 
 # Resilience to Attacks
 ## Defense Against Privacy Attacks
