@@ -36,6 +36,10 @@ The machine learning component layer implements  machine  learning algorithm  co
 # Runtime Architecture
 <img style="text-align:center;width:100%" src="docs/img/runtime_architecture.png">
 
+# The main process
+## The process of data input
+<img style="text-align:center;width:100%" src="docs/img/input_data.png">
+
 # Resilience to Attacks
 ## Defense Against Privacy Attacks
 <img style="text-align:center;width:100%" src="docs/img/defense_against_privacy_attacks.png">
