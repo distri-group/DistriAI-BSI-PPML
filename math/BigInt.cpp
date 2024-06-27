@@ -15,14 +15,19 @@ thread_local BigInt BigInt::tmp2 = 0;
 thread_local gmp_random BigInt::random;
 
 
+
+// Computes the result of (x raised to the power of e) modulo p.
 BigInt powerMod(const BigInt& x,const BigInt& e,const BigInt& p)
 {
   BigInt ans;
+  // If the exponent e is non-negative, computes x^e mod p directly
   if (e>=0)
     { thm_powm(ans.get_thm_t(),x.get_thm_t(),e.get_thm_t(),p.get_thm_t()); }
   else
-    { BigInt xi,ei=-e;
-      invMod(xi,x,p);
+    { 
+      // If the exponent e is negative, computes the modular inverse and adjusts accordingly
+      BigInt xi,ei=-e;
+      invMod(xi,x,p);// Computes the modular inverse of x modulo p
       thm_powm(ans.get_thm_t(),xi.get_thm_t(),ei.get_thm_t(),p.get_thm_t()); 
     }
       
@@ -30,6 +35,10 @@ BigInt powerMod(const BigInt& x,const BigInt& e,const BigInt& p)
 }
 
 
+/**
+ * Computes the result of x raised to the power of e modulo p.
+ * The function employs the fast exponentiation algorithm for efficient computation.
+ */
 int powerMod(int x,int e,int p)
 {
   if (e==1) { return x; }
@@ -45,19 +54,23 @@ int powerMod(int x,int e,int p)
   return ans;
 }
 
-
+//Computes the memory usage report for the BigInt object based on the specified report type.
 size_t BigInt::report_size(ReportType type) const
 {
   size_t res = 0;
+  // Include the size of the current object if the report type is not MINIMAL
   if (type != MINIMAL)
     res += sizeof(*this);
+   // For CAPACITY report, add the allocated limb size
   if (type == CAPACITY)
     res += get_thm_t()->_mp_alloc * sizeof(mp_limb_t);
+  // For USED report, add the absolute size of used limbs
   else if (type == USED)
     res += abs(get_thm_t()->_mp_size) * sizeof(mp_limb_t);
+  // For MINIMAL report, add a fixed overhead plus the number of bytes represented by the BigInt
   else if (type == MINIMAL)
     res += 5 + numBytes(*this);
-  return res;
+  return res;// Return the computed size
 }
 
 template <>
@@ -99,6 +112,7 @@ void BigInt::lottery()
 {
   if (rand() % 1000 == 0)
     if (rand() % 1000 == 0)
+    // Throws an exception to simulate a win when this extremely rare condition is met
       throw runtime_error("much deallocation");
 }
 #endif
