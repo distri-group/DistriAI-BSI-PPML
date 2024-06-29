@@ -1,4 +1,6 @@
 
+#VM runtime Architecture
+<img style="text-align:center;width:100%" src="../../docs/img/vm_runtime_architecture.png">
 
 <p style="text-align:justify; text-justify:inter-ideograph;">
 In multi-party secure computing, there are quantitative and qualitative differences in the operations of addition and multiplication. Addition can be done locally, while multiplication involves communication across multiple parties. This qualitative difference will vary depending on the specific protocol, while taking advantage of the advantages of parallelized communication can reduce the impact due to network latency. The vm supports multithreading and implements parallel computing of multi-party secure computing protocol.
