@@ -1,5 +1,5 @@
 
-#VM runtime Architecture
+# VM runtime Architecture
 <img style="text-align:center;width:100%" src="../../docs/img/vm_runtime_architecture.png">
 
 <p style="text-align:justify; text-justify:inter-ideograph;">
