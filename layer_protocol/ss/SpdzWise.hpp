@@ -9,8 +9,11 @@
 
 template<class T>
 SpdzWise<T>::SpdzWise(Player& P) :
+        // Initialize member variables internal, internal2, and P with the passed Player object P
         internal(P), internal2(P), P(P)
+
 {
+         // Reserve memory space for results container based on OnlineOptions::singleton.batch_size
     results.reserve(OnlineOptions::singleton.batch_size);
 }
 
