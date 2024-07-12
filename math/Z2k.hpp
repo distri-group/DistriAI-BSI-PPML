@@ -21,8 +21,10 @@ const false_type Z2<K>::invertible;
 template<int K>
 void Z2<K>::reqbl(int n)
 {
+	// Check if n is negative and N_BITS is not equal to -n
 	if (n < 0 && N_BITS != -(int)n)
 	{
+		// Throw an exception indicating a mismatch in ring length
 		throw Processor_Error(
 				"Program compiled for rings of length " + to_string(-n)
 				+ " but VM supports only "
@@ -30,6 +32,8 @@ void Z2<K>::reqbl(int n)
 	}
 	else if (n > 0)
 	{
+		// Throw an exception indicating program compiled for fields, not rings
+       		// Suggest running compile.py with appropriate arguments
 		throw Processor_Error("Program compiled for fields not rings, "
 		        "run compile.py with '-R " + to_string(K) + "'");
 	}
