@@ -108,8 +108,10 @@ Slice<U>::Slice(U& bm, size_t start, size_t size) :
 template <class U>
 Slice<U>& Slice<U>::rsub(Slice<U>& other)
 {
+    // Check if the current Slice's squares container size is less than other's end position
     if (bm.squares.size() < other.end)
         throw invalid_length("rsub");
+    // Loop through the range from other's start to end
     for (size_t i = other.start; i < other.end; i++)
         bm.squares[i].rsub(other.bm.squares[i]);
     return *this;
