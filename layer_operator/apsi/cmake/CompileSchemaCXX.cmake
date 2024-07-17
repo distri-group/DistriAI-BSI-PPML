@@ -1,11 +1,12 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT license.
 
+# Compile FlatBuffers schema file psi_params.fbs into C++ code
 execute_process(
     COMMAND ${FLATBUFFERS_FLATC_PATH} --cpp -o "${APSI_BUILD_DIR}/common/apsi" "${APSI_SOURCE_DIR}/common/apsi/psi_params.fbs"
-    OUTPUT_QUIET
-    RESULT_VARIABLE result)
-if(result)
+    OUTPUT_QUIET  # Suppress command output
+    RESULT_VARIABLE result)   # Store command execution result
+if(result)   # Check if command execution resulted in an error
     message(FATAL_ERROR "flatc failed (${result})")
 endif()
 
