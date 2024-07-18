@@ -40,8 +40,9 @@ int main(int argc, const char** argv)
 #undef Z
 #define Z(K, S) \
     if (s == S and k == K) \
-        return machine.run<Spdz2kShare<K, S>, Share<gf2n>>();
+        return machine.run<Spdz2kShare<K, S>, Share<gf2n>>();  // Executes machine.run with template parameters
 
+    // Invocations of macro Z with different K and S values
     Z(64, 64)
     Z(64, 48)
     Z(72, 64)
@@ -53,12 +54,13 @@ int main(int argc, const char** argv)
 
     else
     {
-        if (s == SPDZ2K_DEFAULT_SECURITY)
+        if (s == SPDZ2K_DEFAULT_SECURITY) // Check for user-defined RING_SIZE and default security value
         {
             ring_domain_error(k);
         }
         else
         {
+            // Print error messages for unsupported k and s combinations
             cerr << "not compiled for k=" << k << " and s=" << s << "," << endl;
             cerr << "add Z(" << k << ", " << s << ") to " << __FILE__ << " at line "
                     << (__LINE__ - 11) << " and create Machines/SPDZ2^" << k << "+"
