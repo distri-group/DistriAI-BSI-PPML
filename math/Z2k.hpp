@@ -54,7 +54,11 @@ void Z2<K>::specification(octetStream& os)
 template<int K>
 Z2<K>::Z2(const bigint& x) : Z2()
 {
+	// Get the underlying mpz_t structure pointer from bigint object x
 	auto mp = x.get_mpz_t();
+	// Copy data pointed by mp->_mp_d to the 'a' array of the current object
+        // Copy size is min(N_BYTES, sizeof(mp_limb_t) * abs(mp->_mp_size))
+    	// N_BYTES is likely a constant in Z2 class, indicating size of array 'a'
 	memcpy(a, mp->_mp_d, min((size_t)N_BYTES, sizeof(mp_limb_t) * abs(mp->_mp_size)));
 	if (mp->_mp_size < 0)
 		*this = Z2<K>() - *this;
