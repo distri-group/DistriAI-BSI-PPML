@@ -86,15 +86,20 @@ void mul(Ciphertext& ans,const Ciphertext& c0,const Ciphertext& c1,
   ans.Scale(pk.p());
 }
 
-
+// Defines a template function mul to perform multiplication between an encrypted text and a plaintext
 template<class T,class FD,class S>
 void mul(Ciphertext& ans,const Plaintext<T,FD,S>& a,const Ciphertext& c)
 {
   a.to_poly();
 
   int lev=c.cc0.level();
+
+  // Create an Rq_Element object 'ra' to hold the plaintext polynomial after conversion
+  // (*ans.params).FFTD() retrieves the FFT domain parameters associated with the ciphertext parameters
+  // 'evaluation' likely refers to the mode or context in which the element should be evaluated
   Rq_Element ra((*ans.params).FFTD(),evaluation,evaluation);
   if (lev==0) { ra.lower_level(); }
+  // Populate the 'ra' object with the polynomial coefficients from the plaintext 'a' using its iterator
   ra.from(a.get_iterator());
   ans.mul(c, ra);
 }
