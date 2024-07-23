@@ -13,7 +13,8 @@ void NaiveFFT(vector<modp>& ans,vector<modp>& a,int N,const modp& theta,const Zp
 {
   int i,j;
   modp thetaPow;
-  assignOne(thetaPow,PrD);
+  assignOne(thetaPow,PrD);// Initialize thetaPow to 1 in the context of modular arithmetic
+// Outer loop to iterate over each element of the sequence
   for (i=0; i<N; i++)
     { ans[i]=a[N-1];
       for (j=N-2; j>=0; j--)
