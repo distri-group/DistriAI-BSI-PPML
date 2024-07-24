@@ -78,6 +78,9 @@ bigint generate_prime(int lgp, int m)
   return p;
 }
 
+// Define a function to generate a prime number. Parameters include a reference
+// to a bigint variable p, which represents the generated prime, lgp, the desired
+// number of bits for the prime, and m, the modulus required by the encryption scheme.
 void generate_prime(bigint& p, int lgp, int m)
 {
   if (OnlineOptions::singleton.prime > 0)
