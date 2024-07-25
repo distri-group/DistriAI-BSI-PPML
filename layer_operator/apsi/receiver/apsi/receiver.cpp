@@ -53,6 +53,7 @@ namespace apsi
     {
         size_t IndexTranslationTable::find_item_idx(size_t table_idx) const noexcept
         {
+            // Attempt to find the given table index in the translation map
             auto item_idx = table_idx_to_item_idx_.find(table_idx);
             if (item_idx == table_idx_to_item_idx_.cend()) {
                 return item_count();
