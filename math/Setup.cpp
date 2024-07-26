@@ -126,7 +126,8 @@ void generate_prime(bigint& p, int lgp, int m)
 #endif
 }
 
-
+// Define a function to write the online setup parameters to a file.
+// The function takes a directory name 'dirname' and a prime number 'p'.
 void write_online_setup(string dirname, const bigint& p)
 {
   if (p == 0)
