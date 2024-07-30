@@ -9,13 +9,16 @@
 #include <vector>
 using namespace std;
 
+// Define a template class ArgIter that iterates over a vector of integers
 template <class T>
 class ArgIter
 {
+    // Define member variables to store the current iterator and the end iterator
     vector<int>::const_iterator it;
     vector<int>::const_iterator end;
 
 public:
+    // Constructor that initializes the iterator and the end iterator
     ArgIter(const vector<int>::const_iterator it,
             const vector<int>::const_iterator end) :
                 it(it), end(end)
