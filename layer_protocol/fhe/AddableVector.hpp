@@ -8,7 +8,9 @@
 #include "FHE_Keys.h"
 #include "P2Data.h"
 
+// Assuming the existence of a class template AddableVector and a class FHE_PK
 template<class T>
+// Method to multiply the vector by X^j in the context of some FHE (Fully Homomorphic Encryption) scheme
 AddableVector<T> AddableVector<T>::mul_by_X_i(int j,
         const FHE_PK& pk) const
 {
