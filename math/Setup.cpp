@@ -152,6 +152,7 @@ void write_online_setup(string dirname, const bigint& p)
     throw file_error("cannot write to " + ss.str());
 }
 
+// Function to check the setup of the system by verifying the modulus
 void check_setup(string dir, bigint pr)
 {
   bigint p;
@@ -163,6 +164,7 @@ void check_setup(string dir, bigint pr)
     throw setup_error("wrong modulus in " + filename);
 }
 
+// Function to get the subdirectory for preprocessing, creating it if necessary
 string get_prep_sub_dir(const string& prep_dir, int nparties, int log2mod,
         const string& type_short, bool create)
 {
