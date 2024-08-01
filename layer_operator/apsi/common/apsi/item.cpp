@@ -15,11 +15,13 @@
 using namespace std;
 
 namespace apsi {
+    // Hashes input data to a fixed-size value using the Blake2b hashing algorithm
     void Item::hash_to_value(const void *in, size_t size)
     {
+        // Hashes the input data 'in' of size 'size' to the 'value_' member variable using the Blake2b algorithm
         APSI_blake2b(value_.data(), sizeof(value_), in, size, nullptr, 0);
     }
-
+    // Converts the Item to a Bitstring representation with a specified bit count
     Bitstring Item::to_bitstring(uint32_t item_bit_count) const
     {
         vector<unsigned char> bytes;
