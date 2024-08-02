@@ -41,9 +41,11 @@ Spdz2kPrep<T>::~Spdz2kPrep()
 template<class T>
 void Spdz2kPrep<T>::set_protocol(typename T::Protocol& protocol)
 {
+    // Inherit the protocol setting from the base class OTPrep
     OTPrep<T>::set_protocol(protocol);
     assert(this->proc != 0);
     auto& proc = this->proc;
+    // Placeholder for data positions, initialized with the number of players
     bit_MC = new typename BitShare::MAC_Check(proc->MC.get_alphai());
     // just dummies
     bit_pos = DataPositions(proc->P.num_players());
