@@ -35,9 +35,10 @@ class SGD(Optimizer):
 
     @_no_mem_warnings
     def reset(self, X_by_label=None):
-        """ Reset layer parameters.
+        """ Reset layer parameters and optionally balance training data by public labels.
 
-        :param X_by_label: if given, set training data by public labels for balancing
+        :param X_by_label: if provided, this parameter is used to set the training data 
+                           by public labels for the purpose of balancing the dataset.
         """
         self.X_by_label = X_by_label
         if X_by_label is not None:
