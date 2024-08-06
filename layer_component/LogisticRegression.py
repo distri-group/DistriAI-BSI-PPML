@@ -123,6 +123,25 @@ class SGD(Optimizer):
         self.gamma.imul(1 - 10 ** - 6)
 
 def apply_padding(input_shape, kernel_size, strides, padding):
+    """
+    Calculate the output shape of a convolution operation given the input shape, kernel size, strides, and padding.
+
+    Parameters:
+    input_shape (tuple): The shape of the input volume as (height, width).
+    kernel_size (tuple): The size of the convolution kernel as (height, width).
+    strides (tuple): The strides of the convolution operation as (stride_height, stride_width).
+    padding (int, tuple, or str): The padding added to all four sides of the input. If an integer, the same value
+                                  is used for all spatial dimensions. If a tuple, it must contain two integers
+                                  (padding_height, padding_width). If 'valid', no padding is added (only valid
+                                  convolutions). If 'same', padding is added to keep the output shape the same
+                                  as the input shape (padding may be added).
+
+    Returns:
+    tuple: The output shape of the convolution operation as (output_height, output_width).
+
+    Raises:
+    Exception: If the padding type is not recognized or if the resulting output dimensions are not positive.
+    """
     if isinstance(padding, int):
         padding = [padding, padding]
     if isinstance(padding, (tuple, list)):
