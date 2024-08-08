@@ -46,6 +46,8 @@ void add(Ciphertext& ans,const Ciphertext& c0,const Ciphertext& c1)
 }
 
 
+// The function sub performs subtraction between two ciphertexts c0 and c1,
+// and stores the result in the ciphertext ans.
 void sub(Ciphertext& ans,const Ciphertext& c0,const Ciphertext& c1)
 {
   if (c0.params!=c1.params)  { throw params_mismatch(); }
