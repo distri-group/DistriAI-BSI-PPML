@@ -467,6 +467,22 @@ def solve_linear(A, b, n_iterations, progress=False, n_threads=None,
 
 def solve_linear_diag_precond(A, b, x, r, n_iterations, progress=False,
                               stop=False):
+    """
+    Solve a linear system Ax = b using the Conjugate Gradient method with
+    diagonal preconditioning.
+
+    Parameters:
+    - A: A matrix representing the system.
+    - b: The right-hand side vector of the linear system.
+    - x: The initial guess for the solution vector.
+    - r: The initial residual vector, which should be b - Ax.
+    - n_iterations: The number of iterations to perform.
+    - progress: A boolean indicating whether to print progress information.
+    - stop: A boolean indicating whether to stop if the step size (alpha) is positive.
+
+    Returns:
+    - x: The approximate solution to the linear system after n_iterations.
+    """
     m = 1 / A.diag()
     mr = Array.create_from(m * r[:])
     d = Array.create_from(mr)
