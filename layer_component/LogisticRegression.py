@@ -53,6 +53,7 @@ class SGD(Optimizer):
         super(SGD, self).reset()
 
     def _update(self, i_epoch, i_batch, batch):
+        # Iterate over the gradients, parameters, and parameter updates in parallel
         for nabla, theta, delta_theta in zip(self.nablas, self.thetas,
                                              self.delta_thetas):
             @multithread(self.n_threads, nabla.total_size())
