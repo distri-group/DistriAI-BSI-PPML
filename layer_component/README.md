@@ -19,6 +19,13 @@ step2:model training
 <pre><code>logistic = component.Logistic(32, 2, program)
 logistic.fit(training_x, training_y)
 </code></pre>
+<p style="text-align:justify; text-justify:inter-ideograph;">
+You can use predict() to predict labels and calculate predict probabilities. The following outputs the correctness and a measure of how much  the probability estimate is:
+</p>
+<pre><code>print('%s',(logistic.predict(test_x) - test_y.get_vector()).reveal())
+print('%s',(logistic.predict_proba(test_x) - test_y.get_vector()).reveal())
+</code></pre>
+
 
 <p style="text-align:justify; text-justify:inter-ideograph;">
 step3:model export
