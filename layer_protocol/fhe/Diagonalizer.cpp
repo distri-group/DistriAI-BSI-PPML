@@ -5,6 +5,9 @@
 
 #include "Diagonalizer.h"
 
+/**
+ * Initializes Diagonalizer with matrices, FFT data, and public key for encryption.
+ */
 Diagonalizer::Diagonalizer(const MatrixVector& matrices,
         const FFT_Data& FTD, const FHE_PK& pk) :
         FTD(FTD)
