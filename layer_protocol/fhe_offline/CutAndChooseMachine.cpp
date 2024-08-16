@@ -6,6 +6,7 @@
 #include "FHEOffline/CutAndChooseMachine.h"
 #include "FHEOffline/SimpleGenerator.h"
 
+// Constructor for the CutAndChooseMachine class, taking command-line arguments.
 CutAndChooseMachine::CutAndChooseMachine(int argc, const char** argv)
 {
     opt.add(
