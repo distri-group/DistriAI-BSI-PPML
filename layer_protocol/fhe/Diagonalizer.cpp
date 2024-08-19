@@ -37,6 +37,7 @@ Diagonalizer::Diagonalizer(const MatrixVector& matrices,
     }
 }
 
+// Function to retrieve a Plaintext object filled with FFT_Data from a set of matrices.
 Plaintext_<FFT_Data> Diagonalizer::get_plaintext(
         const MatrixVector& matrices, int left_col,
         int right_col)
