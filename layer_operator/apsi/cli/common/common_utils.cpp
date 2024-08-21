@@ -52,6 +52,7 @@ void prepare_console()
 #endif
 }
 
+// Function to generate a report of timespans in a human-readable format
 vector<string> generate_timespan_report(
     const vector<Stopwatch::TimespanSummary> &timespans, int max_name_length)
 {
