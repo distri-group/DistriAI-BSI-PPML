@@ -43,6 +43,7 @@ CuckooFilter::CuckooFilter(size_t key_count_max, size_t bits_per_tag) : num_item
     table_ = make_unique<CuckooFilterTable>(key_count_max, bits_per_tag);
 }
 
+// Function to check if an item is present in the CuckooFilter
 bool CuckooFilter::contains(gsl::span<const uint64_t> item) const
 {
     size_t idx1, idx2;
