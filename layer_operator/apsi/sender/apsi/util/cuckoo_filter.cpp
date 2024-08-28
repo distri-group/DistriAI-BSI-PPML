@@ -37,6 +37,12 @@ CuckooFilter::CuckooFilter(
     overflow_.used = overflow_used;
 }
 
+/**
+ * Check if the CuckooFilter contains a given item.
+ *
+ * @param item The item to check for existence in the filter, represented as a span of uint64_t.
+ * @return true if the item is likely to be in the filter, false otherwise.
+ */
 CuckooFilter::CuckooFilter(size_t key_count_max, size_t bits_per_tag) : num_items_(0), overflow_()
 {
     overflow_.used = false;
