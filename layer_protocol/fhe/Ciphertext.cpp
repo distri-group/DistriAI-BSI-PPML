@@ -122,6 +122,7 @@ void Ciphertext::add(octetStream& os, int)
   *this += tmp;
 }
 
+// Method to rerandomize the ciphertext within the Ciphertext class
 void Ciphertext::rerandomize(const FHE_PK& pk)
 {
   Rq_Element tmp(*params);
