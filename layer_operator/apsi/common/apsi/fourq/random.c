@@ -28,6 +28,13 @@ static __inline void delay(unsigned int count)
 }
 #endif
 
+/**
+ * Generates random bytes into the given array.
+ * 
+ * @param random_array Array to store random bytes.
+ * @param nbytes Number of bytes to generate.
+ * @return True on success, false on failure.
+ */
 int random_bytes(unsigned char *random_array, unsigned int nbytes)
 { // Generation of "nbytes" of random values
 
