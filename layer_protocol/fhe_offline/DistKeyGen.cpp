@@ -143,12 +143,14 @@ void DistKeyGen::compute_b()
     pk.check_noise(b - a * secret);
 }
 
+
 void DistKeyGen::compute_enc_dash(const vector<Rq_Element>& bs)
 {
     b = sum(bs);
     compute_enc_dash();
 }
 
+// Method to compute the encrypted version of the secret key
 void DistKeyGen::compute_enc_dash()
 {
     Rq_Element dummy(params);
