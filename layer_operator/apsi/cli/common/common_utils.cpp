@@ -76,6 +76,7 @@ vector<string> generate_timespan_report(
     return report;
 }
 
+// Function to generate a report of event times.
 vector<string> generate_event_report(
     const vector<Stopwatch::Timepoint> &timepoints, int max_name_length)
 {
