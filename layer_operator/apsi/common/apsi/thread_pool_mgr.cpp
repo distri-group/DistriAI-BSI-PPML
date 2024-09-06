@@ -54,6 +54,7 @@ ThreadPool &ThreadPoolMgr::thread_pool() const
     return *thread_pool_;
 }
 
+// Sets the number of threads to be used by the thread pool manager.
 void ThreadPoolMgr::SetThreadCount(size_t threads)
 {
     unique_lock<mutex> lock(tp_mutex);
