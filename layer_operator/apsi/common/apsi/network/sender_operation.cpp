@@ -47,6 +47,7 @@ namespace apsi {
             }
         }
 
+        // Serialize the SenderOperationHeader object to an output stream using FlatBuffers.
         size_t SenderOperationHeader::save(ostream &out) const
         {
             flatbuffers::FlatBufferBuilder fbs_builder(128);

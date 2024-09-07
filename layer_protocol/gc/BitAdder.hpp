@@ -14,6 +14,7 @@ template<class T>
 void BitAdder::add(vector<vector<T>>& res, const vector<vector<vector<T>>>& summands,
         SubProcessor<T>& proc, int length, ThreadQueues* queues, int player)
 {
+    // Ensure that the summands vector is not empty and contains elements
     assert(not summands.empty());
     assert(not summands[0].empty());
 

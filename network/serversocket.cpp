@@ -126,6 +126,9 @@ void ServerSocket::wait_for_client_id(int socket, struct sockaddr dest)
     }
 }
 
+/**
+ * Accepts and handles client connections on the server.
+ */
 void ServerSocket::accept_clients()
 {
   while (true)

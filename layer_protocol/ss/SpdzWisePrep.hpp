@@ -67,6 +67,8 @@ void buffer_bits_from_squares_in_ring(vector<SpdzWiseRingShare<K, S>>& bits,
     SquarePrep<BitShare> prep(usage);
     SubProcessor<BitShare> bit_proc(MC, prep, proc->P, proc->Proc);
     prep.set_proc(&bit_proc);
+    // Extract bits from the squares in the ring and store them in the 'bits' vector
+    // The number of bits extracted is determined by the batch size for SpdzWiseRingShare<K, S>
     bits_from_square_in_ring(bits,
             BaseMachine::batch_size<SpdzWiseRingShare<K, S>>(DATA_BIT),
             &prep);

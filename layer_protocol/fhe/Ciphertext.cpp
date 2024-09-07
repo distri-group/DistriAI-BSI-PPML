@@ -57,7 +57,7 @@ void sub(Ciphertext& ans,const Ciphertext& c0,const Ciphertext& c1)
   sub(ans.cc1,c0.cc1,c1.cc1);
 }
 
-
+// Function to multiply two ciphertexts under a given public key
 void mul(Ciphertext& ans,const Ciphertext& c0,const Ciphertext& c1,
          const FHE_PK& pk)
 {
@@ -122,6 +122,7 @@ void Ciphertext::add(octetStream& os, int)
   *this += tmp;
 }
 
+// Method to rerandomize the ciphertext within the Ciphertext class
 void Ciphertext::rerandomize(const FHE_PK& pk)
 {
   Rq_Element tmp(*params);

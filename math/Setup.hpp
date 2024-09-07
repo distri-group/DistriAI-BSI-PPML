@@ -8,6 +8,7 @@
 
 #include "gfp.h"
 
+// Sets up the online environment for a generic type T
 template<class T>
 void generate_online_setup(string dirname, bigint& p, int lgp)
 {

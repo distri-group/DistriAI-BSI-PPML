@@ -25,7 +25,16 @@ void Encrypt_Rq_Element(Ciphertext& c,const Rq_Element& mess, const Random_Coins
     c.set(c0,c1,pk);
 }
 
-
+/**
+ * Generates a fake distributed key generation process for the FHE (Fully Homomorphic Encryption) system.
+ * It simulates a multi-party key generation where each party contributes a share of the secret key.
+ * The resulting public key and secret keys are consistent with the FHE framework.
+ *
+ * @param pk[out] The public key of the FHE system.
+ * @param sks[out] A vector of secret keys, one for each party.
+ * @param p[in] The modulus used in the FHE system.
+ * @param nparties[in] The number of parties involved in the key generation.
+ */
 void DistKeyGen::fake(FHE_PK& pk, vector<FHE_SK>& sks, const BigInt& p, int nparties)
 {
     vector<DistKeyGen> dkgs(nparties, {pk.get_params(), p});
@@ -134,12 +143,14 @@ void DistKeyGen::compute_b()
     pk.check_noise(b - a * secret);
 }
 
+
 void DistKeyGen::compute_enc_dash(const vector<Rq_Element>& bs)
 {
     b = sum(bs);
     compute_enc_dash();
 }
 
+// Method to compute the encrypted version of the secret key
 void DistKeyGen::compute_enc_dash()
 {
     Rq_Element dummy(params);

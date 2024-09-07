@@ -37,12 +37,19 @@ CuckooFilter::CuckooFilter(
     overflow_.used = overflow_used;
 }
 
+/**
+ * Check if the CuckooFilter contains a given item.
+ *
+ * @param item The item to check for existence in the filter, represented as a span of uint64_t.
+ * @return true if the item is likely to be in the filter, false otherwise.
+ */
 CuckooFilter::CuckooFilter(size_t key_count_max, size_t bits_per_tag) : num_items_(0), overflow_()
 {
     overflow_.used = false;
     table_ = make_unique<CuckooFilterTable>(key_count_max, bits_per_tag);
 }
 
+// Function to check if an item is present in the CuckooFilter
 bool CuckooFilter::contains(gsl::span<const uint64_t> item) const
 {
     size_t idx1, idx2;
