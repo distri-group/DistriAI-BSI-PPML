@@ -67,6 +67,9 @@ void ThreadPoolMgr::SetThreadCount(size_t threads)
     }
 }
 
+// Sets the number of physical threads to be used by the thread pool.
+// If the provided number of threads is zero, it defaults to the number of concurrent threads
+// supported by the hardware.
 void ThreadPoolMgr::SetPhysThreadCount(size_t threads)
 {
     unique_lock<mutex> lock(tp_mutex);
