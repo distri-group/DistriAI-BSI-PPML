@@ -67,6 +67,7 @@ namespace apsi {
 
         size_t SenderOperationHeader::load(istream &in)
         {
+            // Read data from the input stream and store it in a vector of unsigned chars.
             vector<unsigned char> in_data(util::read_from_stream(in));
 
             auto verifier = flatbuffers::Verifier(
